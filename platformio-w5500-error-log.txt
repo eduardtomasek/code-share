@@ -1,0 +1,35 @@
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13104
+load:0x40080400,len:3036
+entry 0x400805e4
+My IP address: 192.168.1.24.
+
+assert failed: tcpip_send_msg_wait_sem IDF/components/lwip/lwip/src/api/tcpip.c:455 (Invalid mbox)
+
+
+Backtrace: 0x40083665:0x3ffb1fc0 0x40089ee9:0x3ffb1fe0 0x4008ef4d:0x3ffb2000 0x400ef8a2:0x3ffb2130 0x400fad1d:0x3ffb2160 0x400fad7d:0x3ffb2180 0x400ef635:0x3ffb21d0 0x400e24b5:0x3ffb21f0 0x400e05c6:0x3ffb2630 0x400d702e:0x3ffb2650 0x400d2b24:0x3ffb2670 0x400d2c03:0x3ffb27a0 0x400d2ce3:0x3ffb27e0 0x400e3efe:0x3ffb2820
+
+  #0  0x40083665:0x3ffb1fc0 in panic_abort at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/esp_system/panic.c:402
+  #1  0x40089ee9:0x3ffb1fe0 in esp_system_abort at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/esp_system/esp_system.c:128
+  #2  0x4008ef4d:0x3ffb2000 in __assert_func at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/newlib/assert.c:85
+  #3  0x400ef8a2:0x3ffb2130 in tcpip_send_msg_wait_sem at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/lwip/lwip/src/api/tcpip.c:455 (discriminator 1)
+  #4  0x400fad1d:0x3ffb2160 in netconn_apimsg at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/lwip/lwip/src/api/api_lib.c:136
+  #5  0x400fad7d:0x3ffb2180 in netconn_new_with_proto_and_callback at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/lwip/lwip/src/api/api_lib.c:166
+  #6  0x400ef635:0x3ffb21d0 in lwip_socket at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/lwip/lwip/src/api/sockets.c:1774
+  #7  0x400e24b5:0x3ffb21f0 in socket at C:/Users/eddy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/lwip/lwip/src/include/lwip/sockets.h:656
+      (inlined by) ssh_connect_host_nonblocking at .pio/libdeps/esp32dev/LibSSH-ESP32/src/connect.c:188
+  #8  0x400e05c6:0x3ffb2630 in ssh_socket_connect at .pio/libdeps/esp32dev/LibSSH-ESP32/src/socket.c:887
+  #9  0x400d702e:0x3ffb2650 in ssh_connect at .pio/libdeps/esp32dev/LibSSH-ESP32/src/client.c:600 (discriminator 4)
+  #10 0x400d2b24:0x3ffb2670 in executeSSHCommand(char const*, char const*, char const*, char const*) at src/main.cpp:64      
+  #11 0x400d2c03:0x3ffb27a0 in executeSSHCommandOnAllServers(char const*, char const*, char const*) at src/main.cpp:144 (discriminator 2)
+  #12 0x400d2ce3:0x3ffb27e0 in setup() at src/main.cpp:181
+  #13 0x400e3efe:0x3ffb2820 in loopTask(void*) at C:/Users/eddy/.platformio/packages/framework-arduinoespressif32/cores/esp32/main.cpp:42
+
+
+
+
+ELF file SHA256: 306024d6b8f6833b
